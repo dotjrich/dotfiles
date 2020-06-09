@@ -27,8 +27,8 @@ install_configuration()
     if [[ -f $local_file ]]; then
         if [[ -h $local_file ]]; then
             if [[ `readlink $local_file` == $repo_file ]]; then
-                echo "[INFO] Removing existing $prog_name installation"
-                rm -f $local_file
+                echo "[INFO] $prog_name configuration already installed"
+                return
             else
                 echo "[ERROR] $prog_name configuration exists as symlink, but not pointing to repo directory... skipping install"
                 return
