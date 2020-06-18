@@ -67,3 +67,6 @@
 
 ; C-c o to open buffer in external program.
 (global-set-key "\C-co" 'jrich-open-in-external-program)
+
+; C-c r to revert buffer.
+(global-set-key "\C-cr" 'revert-buffer)
