@@ -1,64 +1,64 @@
-;
-; init.el - Emacs configuration file
-; dotjrich
-;
+;;
+;; init.el - Emacs configuration file
+;; dotjrich
+;;
 
-; Load package.el.
+;; Load package.el.
 (require 'package)
 
-; MELPA.
+;; MELPA.
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/"))
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 
-; Init package.el.
+;; Init package.el.
 (package-initialize)
 
-; Disable splash screen.
+;; Disable splash screen.
 (setq inhibit-splash-screen t)
 
-; Disable tool-bar and menu-bar.
+;; Disable tool-bar and menu-bar.
 (if (fboundp 'tool-bar-mode)
     (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode)
     (menu-bar-mode -1))
 
-; Set theme.
+;; Set theme.
 (load-theme 'cyberpunk t)
 
-; Show column numbers.
+;; Show column numbers.
 (setq column-number-mode t)
 
-; Handle tabs... use 4 spaces, not tab characters.
+;; Handle tabs... use 4 spaces, not tab characters.
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (setq-default c-basic-offset 4) ; C, C++, Java.
 
-; Disable automatic backups.
+;; Disable automatic backups.
 (setq make-backup-files nil)
 
-; C-x t to move to top of buffer, C-x e to move to end of buffer.
+;; C-x t to move to top of buffer, C-x e to move to end of buffer.
 (global-set-key "\C-xt" 'beginning-of-buffer)
 (global-set-key "\C-xe" 'end-of-buffer)
 
-;(global-set-key "\C-w" 'backward-kill-word)
-;(global-set-key "\C-x\C-k" 'kill-region)
+;;(global-set-key "\C-w" 'backward-kill-word)
+;;(global-set-key "\C-x\C-k" 'kill-region)
 
-; Enable WindMove.
+;; Enable WindMove.
 (windmove-default-keybindings)
 
-; Enable Winner mode.
+;; Enable Winner mode.
 (winner-mode)
 
-; Enable auto-complete mode.
+;; Enable auto-complete mode.
 (ac-config-default)
 
-; Delete trailing whitespace on save.
-;(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; Delete trailing whitespace on save.
+;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-; Function to open current buffer in an external program.
+;; Function to open current buffer in an external program.
 (defun jrich-open-in-external-program ()
   "Open current buffer in an external program."
   (interactive)
@@ -68,8 +68,8 @@
                     " "
                     (shell-quote-argument buffer-file-name)))))
 
-; C-c o to open buffer in external program.
+;; C-c o to open buffer in external program.
 (global-set-key "\C-co" 'jrich-open-in-external-program)
 
-; C-c r to revert buffer.
+;; C-c r to revert buffer.
 (global-set-key "\C-cr" 'revert-buffer)
