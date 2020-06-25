@@ -49,6 +49,9 @@
 ; Enable WindMove.
 (windmove-default-keybindings)
 
+; Enable Winner mode.
+(winner-mode)
+
 ; Enable auto-complete mode.
 (ac-config-default)
 
