@@ -26,7 +26,7 @@
     (menu-bar-mode -1))
 
 ;; Set theme.
-(load-theme 'cyberpunk t)
+;(load-theme 'cyberpunk t)
 
 ;; Show column numbers.
 (setq column-number-mode t)
@@ -73,3 +73,7 @@
 
 ;; C-c r to revert buffer.
 (global-set-key "\C-cr" 'revert-buffer)
+
+;; Try to keep init.el pristine... especially from package-selected-packages in custom-set-variables.
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file :noerror)
