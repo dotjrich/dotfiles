@@ -13,6 +13,13 @@
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 
+(when (and
+       (= emacs-major-version 26)
+       (< emacs-minor-version 3))
+  ;; Seen issues with gnutls compatibility on older emacs installs (Debian and CentOS).
+  ;; This seems to fix it up.
+  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
+
 ;; Init package.el.
 (package-initialize)
 
