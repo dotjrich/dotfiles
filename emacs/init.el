@@ -49,6 +49,7 @@
 
 ;; Set theme.
 ;(load-theme 'cyberpunk t)
+(load-theme 'sanityinc-tomorrow-night t)
 
 ;; Show column numbers.
 (setq column-number-mode t)
