@@ -9,6 +9,7 @@
 ;; MELPA.
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/"))
+
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
@@ -23,6 +24,11 @@
 ;; Init package.el.
 (package-initialize)
 
+;; Set Consolas font and start Emacs server on Windows.
+(when (string-equal system-type "windows-nt")
+  (set-face-attribute 'default nil :family "Consolas" :height 110)
+  (server-start))
+
 ;; Disable splash screen.
 (setq inhibit-splash-screen t)
 
@@ -31,6 +37,15 @@
     (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode)
     (menu-bar-mode -1))
+
+;; Set Firefox as the browser to use.
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "firefox")
+
+;; Ido Mode
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
 
 ;; Set theme.
 ;(load-theme 'cyberpunk t)
@@ -60,10 +75,20 @@
 (winner-mode)
 
 ;; Enable auto-complete mode.
-(ac-config-default)
+;(ac-config-default)
 
 ;; Delete trailing whitespace on save.
-;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; Enable company mode.
+(require 'company)
+(add-hook 'after-init-hook #'global-company-mode)
+
+;; eglot stuff
+(add-hook 'go-mode-hook 'eglot-ensure)
+(add-hook 'python-mode-hook 'eglot-ensure)
+
+(global-set-key "\C-cp" 'flymake-show-project-diagnostics)
 
 ;; Function to open current buffer in an external program.
 (defun jrich-open-in-external-program ()
@@ -87,3 +112,23 @@
 ;; Try to keep init.el pristine... especially from package-selected-packages in custom-set-variables.
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file :noerror)
+
+;; Leave timestamp when closing TODOs in Org Mode.
+(setq org-log-done 'time)
+
+;; Open with all headings collapsed.
+(setq org-startup-folded t)
+
+;; C-c a a to open Org Mode Agenda view (with n option).
+(defun jrich-org-show-agenda-and-all-todos (&optional arg)
+  "Show Org Mode agent with all TODOs."
+  (interactive)
+  (org-agenda arg "n"))
+(global-set-key "\C-caa" 'jrich-org-show-agenda-and-all-todos)
+
+;; C-c a t to open todo.org.
+(defun jrich-org-open-todo-file()
+  "Open todo.org."
+  (interactive)
+  (find-file "~/Documents/todo.org"))
+(global-set-key "\C-cat" 'jrich-org-open-todo-file)
