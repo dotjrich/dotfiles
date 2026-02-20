@@ -74,6 +74,9 @@
 ;; C-c r to revert buffer.
 (global-set-key "\C-cr" 'revert-buffer)
 
+;; C-c n to open Neotree.
+(global-set-key "\C-cn" 'neotree-toggle)
+
 ;; Try to keep init.el pristine... especially from package-selected-packages in custom-set-variables.
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file :noerror)
